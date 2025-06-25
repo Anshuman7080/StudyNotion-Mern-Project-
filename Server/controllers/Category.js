@@ -39,6 +39,7 @@ exports.createCategory = async (req, res) => {
     }
 };
 
+
 exports.showAllCategories = async (req, res) => {
     try {
         const allCategories = await Category.find(
@@ -61,27 +62,41 @@ exports.showAllCategories = async (req, res) => {
 
 
 
+exports.showAllCategories = async (req,res) => {
+
+    try {
+        const allCategories =  await Category.find({},{name:true,
+                                        description:true});
+        
+            return res.status(200).json({
+                success:true,
+                message:"All tags received",
+                data:allCategories
+            })  
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+
+
 
 exports.categoryPageDetails = async (req,res) => {
     try {
         const { categoryId } = req.body
-    
+      
       // Get courses for the specified category
-   const selectedCourses = await Category.findById(categoryId)
-    .populate({
-        path: "courses",
-        match: { status: "Published" },
-        populate: [
-            { path: "ratingAndReviews" }, 
-            { 
-                path: "instructor", 
-              
-            }
-        ]
-    })
-    .exec();
-
-
+      const selectedCourses = await Category.findById(categoryId)
+        .populate({
+          path: "courses",
+          match: { status: "Published" },
+          populate: "ratingAndReviews",
+        })
+        .exec()
+  
       // console.log("SELECTED COURSE", selectedCourses)
       // Handle the case when the category is not found
       if (!selectedCourses) {
@@ -91,7 +106,7 @@ exports.categoryPageDetails = async (req,res) => {
           .json({ success: false, message: "Category not found" })
       }
       // Handle the case when there are no courses
-      if (selectedCourses?.courses.length === 0) {
+      if (selectedCourses.courses.length === 0) {
         console.log("No courses found for the selected category.")
         return res.status(404).json({
           success: false,
@@ -101,51 +116,47 @@ exports.categoryPageDetails = async (req,res) => {
   
       // Get courses for other categories
       const categoriesExceptSelected = await Category.find({
-        _id: { $ne: categoryId },
-        course: { $not: { $size: 0 } }
+        id: { $ne: categoryId },
+        courses: { $not: { $size: 0 } }
       })
-    
+      // console.log("categoriesExceptSelected", categoriesExceptSelected)
 
       let differentCourses = await Category.findOne(
         categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
-          ?._id
+          ._id
       )
-       .populate({
-        path: "courses",
-        match: { status: "Published" },
-        populate: [
-            { path: "ratingAndReviews" }, // Populate reviews
-            { 
-                path: "instructor", 
-               
-            }
-        ]
-    })
-    .exec();
+        .populate({
+          path: "courses",
+          match: { status: "Published" },
+          populate: "ratingAndReviews",
+        })
+        .exec()
 
-        // console.log("Different COURSE", differentCourses)
+
+        // console.log("Different COURSEs", differentCourses)
       // Get top-selling courses across all categories
-      const allCategories = await Category.find()
-       .populate({
-        path: "courses",
-        match: { status: "Published" },
-       populate:{
-        path:"instructor",
-       },
-    })
-    .exec();
 
-       
+      const allCategories = await Category.find()
+        .populate({
+          path: "courses",
+          match: { status: "Published" },
+          populate: "ratingAndReviews",
+        })
+        .exec()
       const allCourses = allCategories.flatMap((category) => category.courses)
-      
       const mostSellingCourses = await Course.find({ status: 'Published' })
       .sort({ "studentsEnrolled.length": -1 }).populate("ratingAndReviews") // Sort by studentsEnrolled array length in descending order
       .exec();
-    
+
+      // console.log("selected courses are " ,selectedCourses)
+      //   console.log("differenet courses are " ,differentCourses)
+      //     console.log("most selling courses are " ,mostSellingCourses)
+      //     console.log("name is ",  selectedCourses.name)
+      //     console.log("description  is ",  selectedCourses.description)
 
         res.status(200).json({
-			selectedCategory: selectedCourses,
-			differentCategory: differentCourses,
+			selectedCourses: selectedCourses,
+			differentCourses: differentCourses,
 			mostSellingCourses,
             name: selectedCourses.name,
             description: selectedCourses.description,

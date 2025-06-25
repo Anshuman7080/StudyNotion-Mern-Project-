@@ -30,6 +30,7 @@ const EnrolledCourses = () => {
         getEnrolledCourses();
     }, []);
      
+    console.log("enrolled courses are", enrolledCourses);
 
     return (
         <>

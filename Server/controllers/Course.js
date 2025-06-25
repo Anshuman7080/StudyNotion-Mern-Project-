@@ -47,12 +47,20 @@ exports.createCourse = async (req,res) => {
             instructions
         })
 
-        await Category.findByIdAndUpdate(category,
-            {
-                $push: {
-                    course: newCourse._id
-                }
-            })
+   
+       const updatedCategory = await Category.findByIdAndUpdate(
+  category,
+  {
+    $push: {
+      courses: newCourse._id
+    }
+  },
+  { new: true }
+);
+
+console.log("this is updated category",updatedCategory)
+
+
 
         await User.findByIdAndUpdate(instructorId, {
             $push: {

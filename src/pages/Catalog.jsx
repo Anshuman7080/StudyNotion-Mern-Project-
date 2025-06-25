@@ -52,7 +52,9 @@ useEffect(()=>{
         
     },[categoryId])
 
-
+//     console.log("catalog page data frontend....->", catalogPageData)
+// console.log("name is", catalogPageData?.selectedCourses?.name)
+// console.log("description is ", catalogPageData?.selectedCourses?.description )
 
   return (
     <div className='text-white flex flex-col '>
@@ -60,11 +62,11 @@ useEffect(()=>{
 <div className="bg-richblack-800 p-6 flex flex-col gap-4 ">
     <p className="text-sm flex gap-2 text-richblack-400"> {` Home / Catalog / `}
     <span className="text-md text-yellow-300 font-semibold">
-  {catalogPageData?.selectedCategory?.name}
+  {catalogPageData?.selectedCourses?.name}
     </span>
     </p>
-    <p className="text-richblack-50 font-extrabold">{catalogPageData?.selectedCategory?.name} </p>
-    <p className="text-sm  text-richblack-400" > {catalogPageData?.selectedCategory?.description}</p>
+    <p className="text-richblack-50 font-extrabold">{catalogPageData?.selectedCourses?.name} </p>
+    <p className="text-sm  text-richblack-400" > {catalogPageData?.selectedCourses?.description}</p>
 </div>
 
 <div className="mt-7 w-11/12 flex flex-col mx-auto">
@@ -81,16 +83,16 @@ useEffect(()=>{
 
       <div className="mt-5">
       
-          <CourseSlider Courses={catalogPageData?.selectedCategory?.courses}/>
+          <CourseSlider Courses={catalogPageData?.selectedCourses?.courses}/>
       </div>
     </div>
 
 
     {/* section 2 */}
     <div className='mt-5' >
-        <div className='text-lg  text-richblack-25 font-bold px-5 ' >Top Courses in {catalogPageData?.selectedCategory?.name}</div>
+        <div className='text-lg  text-richblack-25 font-bold px-5 ' >Top Courses in {catalogPageData?.selectedCourses?.name}</div>
         <div className='mt-5'>
-            <CourseSlider Courses={catalogPageData?.differentCategory
+            <CourseSlider Courses={catalogPageData?.selectedCourses
 ?.courses}/>
         </div>
 
@@ -101,7 +103,7 @@ useEffect(()=>{
     <div  className='mt-5' >
         <div className='text-lg  text-richblack-25 font-bold px-5 '>Frequently Bought </div>
     <div className='py-8'>
-        <div className='grid grid-cols-1 lg:grid-cols-2'>
+        <div className='grid gap-2  grid-cols-1 lg:grid-cols-2'>
                 {
                                 catalogPageData?.mostSellingCourses.length === 0 ? (<p className=' text-xl text-white'>No Most selling courses</p>) : (catalogPageData?.mostSellingCourses?.slice(0,8)
                                 .map((course, index) => (
