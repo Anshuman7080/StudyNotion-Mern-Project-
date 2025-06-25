@@ -13,9 +13,9 @@
     "concurrently": "^9.1.2",
     "copy-to-clipboard": "^3.3.3",
     "rc-progress": "^4.0.0",
-    "react": "^19.1.0",
+    "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",
-    "react-dom": "^19.1.0",
+    "react-dom": "^18.3.1",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.55.0",
     "react-hot-toast": "^2.5.2",
@@ -42,22 +42,11 @@
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
