@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { Link, matchPath } from 'react-router-dom'
 import {NavbarLinks} from "../../data/navbar-links"
@@ -10,7 +10,11 @@ import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
 import { useState } from 'react'
 import {IoIosArrowDown} from "react-icons/io"
+import useOnClickOutside from '../../hooks/useOnClickOutside'
 import {RxHamburgerMenu} from "react-icons/rx"
+
+
+
 // import './loader.css'
 // Ḍemo temporary data
 // const subLinks = [
@@ -24,6 +28,10 @@ import {RxHamburgerMenu} from "react-icons/rx"
 //     },
 // ];
 
+
+
+
+
 const Navbar = () => {
     // console.log("Printing base url: ",process.env.REACT_APP_BASE_URL);
     
@@ -33,9 +41,16 @@ const Navbar = () => {
     // console.log("User in Navbar is",user)
     const {cart} = useSelector((state)=> state.cart);
     const {totalItems} = useSelector((state)=> state.cart);
+    const [isMobileMenuOpen,setIsMobileMenuOpen]=useState(false);
     const location = useLocation();
+    const [showCatalogLinks, setShowCatalogLinks] = useState(false);
+
 
     const [subLinks, setSubLinks]  = useState([]);
+const ref=useRef(null);
+
+    useOnClickOutside(ref, ()=>{setIsMobileMenuOpen(false)});
+    
 
     const fetchSublinks = async() => {
         try{
@@ -123,7 +138,7 @@ const Navbar = () => {
         {/* Login/SignUp/Dashboard */}
         <div className='hidden md:flex gap-x-4 items-center'>
             {   
-                user && user?.accountType != "Instructor" && (
+                user && user?.accountType !== "Instructor" && (
                     <Link to="/dashboard/cart" className='relative pr-2'>
                         <AiOutlineShoppingCart className='text-2xl text-richblack-100 ' />
                         {
@@ -160,11 +175,58 @@ const Navbar = () => {
             
         </div>
 
-         <div className='mr-4 md:hidden text-[#AFB2BF] scale-150'>
+         <div className='mr-4 md:hidden text-[#AFB2BF] scale-150'
+        onClick={() => setIsMobileMenuOpen(prev => !prev)}>
             <RxHamburgerMenu />  
          </div>   
               
       </div>
+
+      {
+  isMobileMenuOpen && (
+    <div 
+    ref={ref}
+    className=' absolute top-14 right-0 w-[30%] rounded-lg bg-richblack-700 text-white px-4 py-6 z-50 flex flex-col gap-4 divide-y-[2px] divide-richblack-900 md:hidden'>
+      <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+    <div>
+  <button
+    onClick={() => setShowCatalogLinks(prev => !prev)}
+    className="flex w-full items-center justify-between text-left text-richblack-25"
+  >
+    <span>Catalog</span>
+    <IoIosArrowDown
+      className={`transition-transform duration-200 ${
+        showCatalogLinks ? "rotate-180" : ""
+      }`}
+    />
+  </button>
+
+  {showCatalogLinks && (
+    <div className="mt-2 flex flex-col gap-2 pl-4 text-richblack-100">
+      {subLinks.map((subLink, index) => (
+        <Link
+          to={`/catalog/${subLink.name}`}
+          key={index}
+          onClick={() => {
+            setShowCatalogLinks(false);
+            setIsMobileMenuOpen(false);
+          }}
+        >
+          {subLink.name}
+        </Link>
+      ))}
+    </div>
+  )}
+</div>
+
+      <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+    <Link to ="/signup" onClick={()=>setIsMobileMenuOpen(false)}>SignUp</Link>
+     <Link to ="/login" onClick={()=>setIsMobileMenuOpen(false)}>Login</Link>
+    </div>
+  )
+}
+
+
     </div>
   )
 }
