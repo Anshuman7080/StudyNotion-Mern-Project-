@@ -16,6 +16,9 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import CourseDetailsCard from '../components/core/Course/CourseDetailsCard';
 import { toast } from 'react-hot-toast';
 import Footer from "../components/common/Footer.jsx"
+import { addToCart } from '../slices/cartSlice.js';
+import { ACCOUNT_TYPE } from '../utils/constants.js';
+
 const CourseDetails = () => {
     const {token} = useSelector((state)=> state.auth)
     const {user} = useSelector((state) => state.profile )
@@ -23,6 +26,7 @@ const CourseDetails = () => {
     const { cart } = useSelector((state) => state.cart)
     const {courseId} = useParams()
     const navigate = useNavigate()
+    
     const dispatch = useDispatch()
 
     const [courseData, setCourseData] = useState(null);
@@ -97,6 +101,33 @@ const CourseDetails = () => {
         )
     }
 
+
+const handleAddToCart= ()=>{
+
+     if(user && user?.accountType !== ACCOUNT_TYPE.STUDENT){
+      toast.error("You are not a Student ,You cant buy a course");
+      return ;
+     }
+     if(token){
+      dispatch(addToCart(courseData?.data?.courseDetails));
+      return;
+     }
+
+     setConfirmationModal({
+      text1:"You are not logged in",
+      text2:"please login to add to cart",
+      btn1Text:"login",
+      btn2Text:"Cancel",
+      btn1Handler:()=>navigate("/login"),
+      btn2Handler:()=>setConfirmationModal(null),
+
+     })
+
+
+  }
+
+
+
     const {
         _id: course_id,
         courseName,
@@ -157,8 +188,37 @@ const CourseDetails = () => {
                             Rs. {price}
                         </p>
 
-                        <button className='yellowButton w-full'>Buy Now</button>
-                        <button className='blackButton'>Add to Cart</button>
+                    <div className="flex flex-col gap-y-6">
+  <button
+  className="bg-yellow-50"
+  onClick={user && courseData?.data?.courseDetails?.studentsEnrolled.map(enrolled => enrolled._id).includes(user?._id)? 
+  ()=>navigate("/dashboard/enrolled-courses"): 
+   handleBuyCourse
+   }
+   >
+
+  {
+
+user && courseData?.data?.courseDetails?.studentsEnrolled.map(enrolled => enrolled._id).includes(user?._id) ? " Go to Course" :
+"Buy Now"
+
+  }
+  </button>
+
+{
+  (!courseData?.data?.courseDetails?.studentsEnrolled.includes(user?._id))  && (
+    <button 
+      className="bg-yellow-50"
+    onClick={handleAddToCart}>
+      Add to Cart
+    </button>
+  )
+}
+
+
+</div>
+
+
                    </div>
 
 
