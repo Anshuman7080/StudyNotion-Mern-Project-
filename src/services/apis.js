@@ -1,5 +1,5 @@
 
-const BASE_URL =process.env.REACT_APP_BASE_URL
+const BASE_URL ="https://studynotion-mern-project-backend.onrender.com"
 
 
 
