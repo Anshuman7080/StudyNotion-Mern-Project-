@@ -1,5 +1,5 @@
 
-const BASE_URL ="https://studynotion-mern-project-backend.onrender.com"
+const BASE_URL ="https://studynotion-mern-project-backend.onrender.com/api/v1"
 
 
 
