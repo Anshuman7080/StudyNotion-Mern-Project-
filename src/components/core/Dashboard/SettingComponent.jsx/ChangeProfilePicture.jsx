@@ -62,11 +62,14 @@ const ChangeProfilePicture = () => {
   return (
     <div className='w-11/12  text-white mt-4 '>
       <div  className='  w-full md:w-[80%] max-w-[800px] mx-auto bg-richblack-800 flex  gap-10 py-4 rounded-lg px-6 '>
-        <img src={previewSource || user?.image}
-       className="aspect-square w-[78px] rounded-full object-cover"/>
+      <img
+  src={previewSource || user?.image}
+  className="w-[78px] h-[78px] min-w-[78px] min-h-[78px] rounded-full object-cover"
+/>
+
         <div className="flex flex-col mt-2">
           <p className="text-sm text-richblack-100">Change profile Picture</p>
-          <div className="flex  gap-4 mt-2">
+          <div className="flex flex-col md:flex-row gap-4 mt-2">
             <input type="file" 
             ref={fileRef} 
             onChange={handleFileChange} 

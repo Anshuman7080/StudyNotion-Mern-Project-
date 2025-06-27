@@ -4,7 +4,7 @@ import { TbHierarchy3 } from 'react-icons/tb';
 
 const CourseCard = ({cardData,currentCard,}) => {
   return (
-    <div className={`w-full lg:w-[360px] h-[200px] lg:h-[300px] box-border cursor-pointer
+    <div className={`w-full lg:w-[360px] min-h-[200px] lg:h-[300px] box-border cursor-pointer
      ${currentCard === cardData.heading ? "bg-white shadow-[12px_12px_0_0] shadow-yellow-50  text-richblack-25" 
      : "bg-richblack-800  text-richblack-25"}`}>
 

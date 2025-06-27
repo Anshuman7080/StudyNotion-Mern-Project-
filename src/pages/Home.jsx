@@ -75,7 +75,7 @@ from anywhere in the world, and get access to a wealth of resources,
 
 {/* code section 1 */}
 
-<div>
+<div className="py-3">
 <CodeBlocks
   position={"lg:flex-row"}
   heading={
@@ -121,7 +121,7 @@ codeColor={"text-yellow-25"}
 
 
 {/* code section 2 */}
-<div>
+<div className="py-3">
 <CodeBlocks
   position={"lg:flex-row-reverse"}
   heading={
@@ -236,9 +236,15 @@ codeColor={"text-yellow-25"}
 
              <InstructorSection/>
              <h2 className="text-center text-4xl font-semibold mt-10">Reviews from Other Learners</h2>
-                {/* Review slider*/}
-                <ReviewSlider/>
+                       
         </div>
+           {/* Review slider*/}
+
+        <section className="w-full">
+  <div className="">
+    <ReviewSlider />
+  </div>
+</section>
 
 
          {/* footer */}

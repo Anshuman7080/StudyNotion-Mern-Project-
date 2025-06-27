@@ -34,12 +34,13 @@ app.use(cookieParser());
 
 app.use(
     cors({
-        origin: 'https://studynotion-mern-project-frontend.onrender.com',
+        origin: 'http://localhost:3000',
         credentials: true,
     })
 );
 // origin: 'http://localhost:3000': This means only requests coming from 
 // http://localhost:3000 are allowed.
+// https://studynotion-mern-project-frontend.onrender.com
 // credentials: true: This allows cookies and other credentials
 //  (like authentication tokens) to be sent along with the requests.
 

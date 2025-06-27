@@ -47,7 +47,7 @@ const ContactUsForm = () => {
 
     return (
         <form onSubmit={handleSubmit(submitContactForm)}>
-            <div className="flex flex-col gap-3  max-w-[500px] w-[400px] min-h-[430px]">
+            <div className="flex flex-col gap-3  max-w-[500px] w-[350px] md:w-[400px] min-h-[430px]">
                 {/* First Name */}
                 <div className="flex flex-col lg:flex-row  gap-5 ">
                     <div className="flex flex-col gap-1 lg:w-[48%]">

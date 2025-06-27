@@ -22,7 +22,7 @@ const MyProfile = () => {
 <div className='flex flex-row gap-6 mx-8 w-[50%]'>
 <img src={user?.image}
     alt={`profile-${user?.firstName}`}
-    className="aspect-square w-[30%] rounded-full object-cover"
+     className="w-[78px] h-[78px] min-w-[78px] min-h-[78px] rounded-full object-cover"
 />
 <div className=' flex flex-col w-[40%] '>
     <p className="text-richblack-5 py-3 font-xl uppercase">{user?.firstName+" "+ user?.lastName}</p>

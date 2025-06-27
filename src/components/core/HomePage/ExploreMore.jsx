@@ -28,7 +28,7 @@ const ExploreMore = () => {
   return (
     <div className='flex flex-col gap-5'>
 
-      <div className="text-4xl font-semibold text-center">
+      <div className="text-4xl px-2 font-semibold text-center">
         Unlock the 
         <HighlightText text={"Power of Code"}/>
       </div>
@@ -37,10 +37,10 @@ const ExploreMore = () => {
         Learn to build anything you can imagine
       </p>
 
-      <div className="flex flex-row rounded-full bg-richblack-800 mb-5 border-richblack-100 mt-5 px-1 py-1">
+      <div className="flex flex-row flex-wrap rounded-full bg-richblack-800 mb-5 border-richblack-100 mt-5 px-2 py-2">
        { tabsName.map((element,index)=>{
             return (
-                <div className={`text-[16px] flex flex-row items-center gap-2 ${currentTab===element ? "bg-richblack-900 text-richblack-25 font-medium": "text-richblack-200"}
+                <div className={`text-[16px] flex flex-row mx-auto items-center gap-2 ${currentTab===element ? "bg-richblack-900 text-richblack-25 font-medium": "text-richblack-200"}
                  rounded-full duration-200 cursor-pointer hover:bg-richblack-900 hover:text-richblack-25 px-7 py-2`}
                 key={index}
                 onClick={()=>setMyCards(element)}>

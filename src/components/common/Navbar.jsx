@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
-import { Link, matchPath } from 'react-router-dom'
+import { Link, matchPath, useNavigate } from 'react-router-dom'
 import {NavbarLinks} from "../../data/navbar-links"
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import ProfileDropDown from '../core/HomePage/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiconnector'
@@ -12,7 +12,9 @@ import { useState } from 'react'
 import {IoIosArrowDown} from "react-icons/io"
 import useOnClickOutside from '../../hooks/useOnClickOutside'
 import {RxHamburgerMenu} from "react-icons/rx"
+import ConfirmationModal from './ConfirmationModal'
 
+import {logout} from "../../services/operations/authAPI"
 
 
 // import './loader.css'
@@ -44,7 +46,9 @@ const Navbar = () => {
     const [isMobileMenuOpen,setIsMobileMenuOpen]=useState(false);
     const location = useLocation();
     const [showCatalogLinks, setShowCatalogLinks] = useState(false);
-
+     const [confirmationModal, setConfirmationModal] = useState(null);
+     const navigate=useNavigate();
+const dispatch=useDispatch();
 
     const [subLinks, setSubLinks]  = useState([]);
 const ref=useRef(null);
@@ -184,9 +188,19 @@ const ref=useRef(null);
 
       {
   isMobileMenuOpen && (
+
+    
     <div 
     ref={ref}
     className=' absolute top-14 right-0 w-[30%] rounded-lg bg-richblack-700 text-white px-4 py-6 z-50 flex flex-col gap-4 divide-y-[2px] divide-richblack-900 md:hidden'>
+      
+      {
+        token!==null &&
+        (
+          <Link to="/dashboard/my-profile"  onClick={() => setIsMobileMenuOpen(false)}>Dashboard</Link>
+        )
+      }
+      
       <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
     <div>
   <button
@@ -220,8 +234,20 @@ const ref=useRef(null);
 </div>
 
       <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-    <Link to ="/signup" onClick={()=>setIsMobileMenuOpen(false)}>SignUp</Link>
+
+    {
+      token ===null && 
+      (
+        <Link to ="/signup" onClick={()=>setIsMobileMenuOpen(false)}>SignUp</Link>
+      )
+    }
+    {
+      token===null && 
+      (
      <Link to ="/login" onClick={()=>setIsMobileMenuOpen(false)}>Login</Link>
+      )
+    }
+    
     </div>
   )
 }
