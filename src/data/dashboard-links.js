@@ -34,12 +34,12 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.STUDENT,
     icon: "VscMortarBoard",
   },
-  // {
-  //   id:6,
-  //   name:"cart",
-  //   path:"/dashboard/cart",
-  //   type:ACCOUNT_TYPE.STUDENT,
-
-  // }
+{
+  id: 6,
+  name: "Cart",
+  path: "/dashboard/cart",
+  type: ACCOUNT_TYPE.STUDENT,
+  icon: "VscArchive", 
+}
   
 ];

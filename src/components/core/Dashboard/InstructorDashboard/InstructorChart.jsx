@@ -9,7 +9,7 @@ Chart.register(ArcElement)
 
 const InstructorChart = ({courses}) => {
   // State to keep track of the currently selected chart
-  const [currChart, setCurrChart] = useState("students")
+  const [currChart, setCurrChart] = useState("income")
 
   // Function to generate random colors for the chart
   const generateRandomColors = (numColors) => {
@@ -33,7 +33,7 @@ const InstructorChart = ({courses}) => {
       },
     ],
   }
-  // console.log("chartDataStudents", chartDataStudents)
+  console.log("chartDataStudents", chartDataStudents)
 
   // Data for the chart displaying income information
   const chartIncomeData = {
@@ -45,20 +45,20 @@ const InstructorChart = ({courses}) => {
       },
     ],
   }
-  // console.log("chartIncomeData",chartIncomeData)
+  console.log("chartIncomeData",chartIncomeData)
   // Options for the chart
   const options = {
     maintainAspectRatio: false,
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-y-2 rounded-md bg-richblack-800 p-6">
+    <div className="flex flex-1 flex-col gap-y-2 max-w-maxContent rounded-md bg-richblack-800 p-6">
       <p className="text-lg font-bold text-richblack-5">Visualize</p>
       <div className="space-x-4 font-semibold">
         {/* Button to switch to the "students" chart */}
         <button
           onClick={() => setCurrChart("students")}
-          className={`rounded-sm p-1 px-3 transition-all duration-200 ${
+          className={`rounded-sm  relative z-50 p-1 px-3 transition-all duration-200 ${
             currChart === "students"
               ? "bg-richblack-700 text-yellow-50"
               : "text-yellow-400"
@@ -69,7 +69,7 @@ const InstructorChart = ({courses}) => {
         {/* Button to switch to the "income" chart */}
         <button
           onClick={() => setCurrChart("income")}
-          className={`rounded-sm p-1 px-3 transition-all duration-200 ${
+          className={`rounded-sm relative z-50 p-1 px-3 transition-all duration-200 ${
             currChart === "income"
               ? "bg-richblack-700 text-yellow-50"
               : "text-yellow-400"
@@ -78,7 +78,7 @@ const InstructorChart = ({courses}) => {
           Income
         </button>
       </div>
-      <div className="-mt-16 pl-12 aspect-square h-full  ">
+      <div className="-mt-16 pl-12 aspect-square h-full -z-0 relative ">
         {/* Render the Pie chart based on the selected chart */}
         <Pie
           data={currChart === "students" ? chartDataStudents : chartIncomeData}
