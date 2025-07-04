@@ -75,7 +75,7 @@ from anywhere in the world, and get access to a wealth of resources,
 
 {/* code section 1 */}
 
-<div className="py-3">
+<div className="py-3 ml-2 md:ml-0">
 <CodeBlocks
   position={"lg:flex-row"}
   heading={
@@ -121,7 +121,7 @@ codeColor={"text-yellow-25"}
 
 
 {/* code section 2 */}
-<div className="py-3">
+<div className="py-3 ml-2 md:ml-0">
 <CodeBlocks
   position={"lg:flex-row-reverse"}
   heading={
