@@ -12,7 +12,7 @@ const CodeBlocks = ({position,heading, subheading,ctabtn1,ctabtn2,codeblock,back
       {/* section 1 */}
       <div className=" w-[100%] lg:w-[50%] flex flex-col gap-8">
          {heading}
-         <div className="text-richblack-300 font-bold w-[85%]">
+         <div className="text-richblack-300  font-bold w-[85%] ml-2 md:ml-0">
             {subheading}
          </div>  
 
