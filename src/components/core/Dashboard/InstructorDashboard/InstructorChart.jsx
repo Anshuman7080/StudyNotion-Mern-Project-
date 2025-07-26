@@ -8,10 +8,9 @@ Chart.register(ArcElement)
 
 
 const InstructorChart = ({courses}) => {
-  // State to keep track of the currently selected chart
+ 
   const [currChart, setCurrChart] = useState("income")
 
-  // Function to generate random colors for the chart
   const generateRandomColors = (numColors) => {
     const colors = []
     for (let i = 0; i < numColors; i++) {
@@ -23,7 +22,7 @@ const InstructorChart = ({courses}) => {
     return colors
   }
 
-  // Data for the chart displaying student information
+
   const chartDataStudents = {
     labels: courses.map((course) => course.courseName),
     datasets: [
@@ -35,7 +34,6 @@ const InstructorChart = ({courses}) => {
   }
   console.log("chartDataStudents", chartDataStudents)
 
-  // Data for the chart displaying income information
   const chartIncomeData = {
     labels: courses.map((course) => course.courseName),
     datasets: [
@@ -46,7 +44,7 @@ const InstructorChart = ({courses}) => {
     ],
   }
   console.log("chartIncomeData",chartIncomeData)
-  // Options for the chart
+
   const options = {
     maintainAspectRatio: false,
   }
@@ -55,7 +53,7 @@ const InstructorChart = ({courses}) => {
     <div className="flex flex-1 flex-col gap-y-2 max-w-maxContent rounded-md bg-richblack-800 p-6">
       <p className="text-lg font-bold text-richblack-5">Visualize</p>
       <div className="space-x-4 font-semibold">
-        {/* Button to switch to the "students" chart */}
+
         <button
           onClick={() => setCurrChart("students")}
           className={`rounded-sm  relative z-50 p-1 px-3 transition-all duration-200 ${
@@ -66,7 +64,7 @@ const InstructorChart = ({courses}) => {
         >
           Students
         </button>
-        {/* Button to switch to the "income" chart */}
+
         <button
           onClick={() => setCurrChart("income")}
           className={`rounded-sm relative z-50 p-1 px-3 transition-all duration-200 ${
@@ -79,7 +77,7 @@ const InstructorChart = ({courses}) => {
         </button>
       </div>
       <div className="-mt-16 pl-12 aspect-square h-full -z-0 relative ">
-        {/* Render the Pie chart based on the selected chart */}
+      
         <Pie
           data={currChart === "students" ? chartDataStudents : chartIncomeData}
           options={options}
