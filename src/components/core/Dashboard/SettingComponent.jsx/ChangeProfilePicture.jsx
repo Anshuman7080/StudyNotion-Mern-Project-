@@ -98,29 +98,3 @@ const ChangeProfilePicture = () => {
 
 export default ChangeProfilePicture
 
-
-//*************useRef hook*************
-
-// To persist a value across re-renders 
-// means ensuring that a certain piece of data or
-//  reference remains consistent and does not reset
-//  whenever the React component re-renders.
-
-
-//when we delcare an variable using use state 
-// ,its value get updated everytime we render the page 
-// means it does not persist its value
-
-// so ,when we need to keep the value across rerender then
-// for that we use useref hook
-// it persist the value across various re-render
-
-
-//it return a single object.
-// value of useref stores in current field
-
-
-// the main use of useRef hook is to directly access 
-// and change the element from  DOM
-// for this we create a refrence of useRef and link with the 
-// element whome we want to access
