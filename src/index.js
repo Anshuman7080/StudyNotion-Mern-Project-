@@ -25,15 +25,6 @@ root.render(
   </React.StrictMode>
 );
 
-//...........provider...................
-// Redux is used for state management, meaning it keeps track of data that
-//  multiple components might need. But React components don’t automatically
-//   know about Redux—Provider makes sure that every component inside it can access the store.
-// Think of Provider as a bridge between your React app and the Redux store.
-
-// Once you've set up the Provider, any component inside your app can connect to the Redux store and 
-// retrieve or modify data. Without Provider, your components wouldn’t know Redux exists!
-
 
 //............React.strictMode...................
 // React.StrictMode is a special tool in React that helps developers catch potential problems in their code.
