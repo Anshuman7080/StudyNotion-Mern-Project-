@@ -9,7 +9,7 @@ const CodeBlocks = ({position,heading, subheading,ctabtn1,ctabtn2,codeblock,back
   return (
     <div className={`flex   ${position} flex-col  my-20 justify-between gap-10`}>
       
-      {/* section 1 */}
+
       <div className=" w-[100%] lg:w-[50%] flex flex-col gap-8">
          {heading}
          <div className="text-richblack-300  font-bold w-[85%] ml-2 md:ml-0">
@@ -31,11 +31,10 @@ const CodeBlocks = ({position,heading, subheading,ctabtn1,ctabtn2,codeblock,back
          </div>             
       </div>
 
-      {/* section 2 */} 
 
       <div className="h-fit flex flex-row sm:text-sm leading-[18px] sm:leading-6  py-4 w-[100%] lg:w-[470px] 
 ">
-        {/* HW: add BG gradient  */}
+ 
          <div className="text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold ">
             <p>1</p>
             <p>2</p>
