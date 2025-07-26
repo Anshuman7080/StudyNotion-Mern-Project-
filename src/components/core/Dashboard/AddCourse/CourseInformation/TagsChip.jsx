@@ -5,20 +5,20 @@ const TagsChip = ({ name, label, errors, register, setValue }) => {
     const [tags, setTags] = useState("");
     const [tagList, setTagList] = useState([]);
 
-    // Register the field name for React Hook Form
+    
     useEffect(() => {
         register(name, { required: true });
     }, [name, register]);
 
-    // Update form value whenever tag list changes
+    
     useEffect(() => {
         setValue(name, tagList);
     }, [name, tagList, setValue]);
 
     const handleAddTag = () => {
-        if (tags.trim()) { // Prevent adding empty tags
+        if (tags.trim()) { 
             setTagList([...tagList, tags.trim()]);
-            setTags(""); // Clear input field
+            setTags(""); 
         }
     };
 
