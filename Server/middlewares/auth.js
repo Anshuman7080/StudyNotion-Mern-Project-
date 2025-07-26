@@ -38,7 +38,7 @@ exports.auth = async (req,res, next) => {
     }
 }
 
-//isStudent
+
 exports.isStudent = async (req, res, next) => {
    
     try {
@@ -59,7 +59,7 @@ exports.isStudent = async (req, res, next) => {
     }
 }
 
-//isInstructor
+
 exports.isInstructor = async (req, res, next) => {
     try {
 
@@ -80,7 +80,7 @@ exports.isInstructor = async (req, res, next) => {
 }
 
 
-//isAdmin
+
 exports.isAdmin = async (req, res, next) => {
     try {
 
