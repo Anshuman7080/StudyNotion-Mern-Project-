@@ -26,11 +26,7 @@ function LoginForm() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    // to call a function that required to  intract with
-    // redux store we use disaptch ,this is known as thunk 
-
-    // A thunk in Redux is a function that allows you to write asynchronous logic (like API calls) or
-    //  complex synchronous logic in your action creators.
+   
     dispatch(login(email, password, navigate))
   }
 
