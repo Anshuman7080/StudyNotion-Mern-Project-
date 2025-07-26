@@ -8,7 +8,7 @@ const {convertSecondsToDuration}=require("../utils/secToDuration")
 const CourseProgress = require("../models/CourseProgress")
 
 
-//function to create a new Course
+
 exports.createCourse = async (req,res) => {
     try {
         const{courseName, courseDescription, whatWillYouLearn, price, category,tags,status, instructions} = req.body;
@@ -95,7 +95,7 @@ exports.editCourse = async (req, res) => {
         return res.status(404).json({ error: "Course not found" })
       }
   
-      // If Thumbnail Image is found, update it
+     
       if (req.files) {
         console.log("thumbnail update")
         const thumbnail = req.files.thumbnailImage
@@ -106,7 +106,7 @@ exports.editCourse = async (req, res) => {
         course.thumbnail = thumbnailImage.secure_url
       }
   
-      // Update only the fields that are present in the request body
+  
       for (const key in updates) {
         if (updates.hasOwnProperty(key)) {
           course[key] = updates[key]
@@ -155,7 +155,7 @@ exports.editCourse = async (req, res) => {
   }
   
 
-//getAllCourses handler function
+
 exports.getAllCourses = async (req, res) => {
     try {
         const allCourses = await Course.find(
@@ -189,12 +189,12 @@ exports.getAllCourses = async (req, res) => {
 };
 
 
-//getCourseDetails
+
 exports.getCourseDetails = async (req, res) => {
   try {
-    //get id
+
     const {courseId} = req.body;
-    //find course details
+
     const courseDetails = await Course.findById(courseId)
                                 .populate(
                                     {
@@ -213,12 +213,12 @@ exports.getCourseDetails = async (req, res) => {
                                     path:"courseContent",
                                     populate:{
                                         path:"subSection",
-                                        //select: "-videoUrl",
+                                        
                                     },
                                 })
                                 .exec();
 
-        //validation
+        
         if(!courseDetails) {
             return res.status(400).json({
                 success:false,
@@ -240,7 +240,7 @@ exports.getCourseDetails = async (req, res) => {
     })
 
     const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
-        //return response
+       
         return res.status(200).json({
             success:true,
             message:"Course Details fetched successfully",
@@ -263,10 +263,10 @@ exports.getCourseDetails = async (req, res) => {
 
   exports.getInstructorCourses = async (req, res) => {
     try {
-      // Get the instructor ID from the authenticated user or request body
+  
       const instructorId = req.user.id
   
-      // Find all courses belonging to the instructor
+    
       const instructorCourses = await Course.find({
         instructor: instructorId,
       }).sort({ createdAt: -1 }).populate({
@@ -278,7 +278,7 @@ exports.getCourseDetails = async (req, res) => {
       .exec()
     
   
-      // Return the instructor's courses
+     
       res.status(200).json({
         success: true,
         data: instructorCourses,
@@ -298,7 +298,7 @@ exports.getCourseDetails = async (req, res) => {
      
       const { courseId } = req.body
   
-      // Find the course
+     
       const course = await Course.findById(courseId)
   
       if (!course) {
@@ -306,7 +306,7 @@ exports.getCourseDetails = async (req, res) => {
       }
       
   
-      // Unenroll students from the course
+    
       const studentsEnrolled = course.studentsEnrolled
    
       for (const studentId of studentsEnrolled) {
@@ -316,11 +316,11 @@ exports.getCourseDetails = async (req, res) => {
       }
     
   
-      // Delete sections and sub-sections
+     
       const courseSections = course.courseContent
        
       for (const sectionId of courseSections) {
-        // Delete sub-sections of the section
+       
      
         const section = await Section.findById(sectionId)
       
@@ -333,14 +333,14 @@ exports.getCourseDetails = async (req, res) => {
           }
         }
   
-        // Delete the section
+      
         
         await Section.findByIdAndDelete(sectionId)
          
       }
       
 
-      // Delete the course
+    
      
       await Course.findByIdAndDelete(courseId)
      
@@ -397,12 +397,6 @@ exports.getCourseDetails = async (req, res) => {
         })
       }
   
-      // if (courseDetails.status === "Draft") {
-      //   return res.status(403).json({
-      //     success: false,
-      //     message: `Accessing a draft course is forbidden`,
-      //   });
-      // }
   
       let totalDurationInSeconds = 0
       courseDetails.courseContent.forEach((content) => {
