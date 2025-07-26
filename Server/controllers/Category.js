@@ -3,13 +3,13 @@ const Course = require('../models/Course')
 function getRandomInt(max) {
     return Math.floor(Math.random() * max)
   }
-//create category handler
+
 exports.createCategory = async (req, res) => {
     try {
 
-        //fetch data
+      
         const {name, description} = req.body;
-        //validation
+
         if(!name) {
             return res
                 .status(404)
@@ -19,13 +19,13 @@ exports.createCategory = async (req, res) => {
             })
         }
 
-        //create entry in DB
+
         const CategoryDetails = await Category.create({
             name: name,
             description: description,
         });
         console.log(CategoryDetails);
-        //return response
+      
         return res.status(200).json({
             success: true,
             message: 'Category Created Successfully',
@@ -88,7 +88,7 @@ exports.categoryPageDetails = async (req,res) => {
     try {
         const { categoryId } = req.body
       
-      // Get courses for the specified category
+   
       const selectedCourses = await Category.findById(categoryId)
         .populate({
           path: "courses",
@@ -98,14 +98,14 @@ exports.categoryPageDetails = async (req,res) => {
         .exec()
   
       // console.log("SELECTED COURSE", selectedCourses)
-      // Handle the case when the category is not found
+     
       if (!selectedCourses) {
         console.log("Category not found.")
         return res
           .status(404)
           .json({ success: false, message: "Category not found" })
       }
-      // Handle the case when there are no courses
+      
       if (selectedCourses.courses.length === 0) {
         console.log("No courses found for the selected category.")
         return res.status(404).json({
@@ -114,7 +114,7 @@ exports.categoryPageDetails = async (req,res) => {
         })
       }
   
-      // Get courses for other categories
+    
       const categoriesExceptSelected = await Category.find({
         id: { $ne: categoryId },
         courses: { $not: { $size: 0 } }
@@ -134,7 +134,7 @@ exports.categoryPageDetails = async (req,res) => {
 
 
         // console.log("Different COURSEs", differentCourses)
-      // Get top-selling courses across all categories
+     
 
       const allCategories = await Category.find()
         .populate({
@@ -145,7 +145,7 @@ exports.categoryPageDetails = async (req,res) => {
         .exec()
       const allCourses = allCategories.flatMap((category) => category.courses)
       const mostSellingCourses = await Course.find({ status: 'Published' })
-      .sort({ "studentsEnrolled.length": -1 }).populate("ratingAndReviews") // Sort by studentsEnrolled array length in descending order
+      .sort({ "studentsEnrolled.length": -1 }).populate("ratingAndReviews") 
       .exec();
 
       // console.log("selected courses are " ,selectedCourses)
