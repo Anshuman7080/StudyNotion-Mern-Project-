@@ -6,27 +6,27 @@ const Course = require("../models/Course");
 
 const { convertSecondsToDuration } = require("../utils/secToDuration");exports.updateProfile = async (req, res) => {
     try {   
-        //get data
+       
 
         const {DOB='', About='', contactNumber, Gender=''} = req.body;
-        //Find the profile by id
+      
    const id=req.user.id;
         const user = await User.findById(id);
   
         const profile = await Profile.findById(user.additionalDetails);
        
      
-        //update profile fields
+     
         profile.dateOfBirth = DOB;
         profile.about = About;
         profile.contactNumber = contactNumber;
         profile.gender = Gender;
 
   
-        //Save the updated profile
+      
         await profile.save();
 
-        //return response
+       
         return res.status(200).json({
             success: true,
             message: 'Profile Updated Successfully',
@@ -42,31 +42,30 @@ const { convertSecondsToDuration } = require("../utils/secToDuration");exports.u
     }
 };
 
-//delete Account
+
 
 exports.deleteAccount = async (req, res) => {
  
     try {    
-        //get id
+  
        
         const userId = req.user.id
        
-        //validation of id
+      
         const userDetails = await User.findById(userId);
         console.log("userDetails is",userDetails);
-        //delete profile
+    
         if(!userDetails) {
             return res.status(404).send({
                 success: false,
                 message: 'User Not Found',
             });
         }
-        //delete associated profile with user
+   
         await Profile.findByIdAndDelete({_id: userDetails.additionalDetails});
-        //TODO: HW unenroll user form all enroled courses
-        //Now delete user
+       
         await User.findByIdAndDelete({_id:userId});
-        //return response
+     
         return res.status(200).json({
             success: true,
             message: 'User Deleted Successfully',
@@ -87,15 +86,15 @@ exports.deleteAccount = async (req, res) => {
 
 exports.getAllUserDetails = async (req, res) => {
     try {
-        //get id
+     
         const id = req.user.id;
         
-        //validation and get user details
+       
         const userDetails = await User.findById(id)
             .populate('additionalDetails')
             .exec();
        
-        //return response
+    
         return res.status(200).json({
             success: true,
             message: 'User Data Fetched Successfully',
@@ -225,7 +224,6 @@ const courseData=courseDetails.map((course)=>{
   const  totalStudentEnrolled=course.studentsEnrolled.length;
   const totalAmountGenerated = course.price * totalStudentEnrolled;
 
-  // create a new object with the additional fields
 
   const courseDataWithStats={
     _id:course._id,
