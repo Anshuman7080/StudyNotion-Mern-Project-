@@ -100,21 +100,7 @@ export function signUp(
 }
 
 export function login(email, password, navigate) {
-// ........use of Disptach in redux-thunk........
 
-  // By default, Redux only allows synchronous actions, meaning you can’t directly handle async
-  //  tasks like fetching data from an API. Thunk middleware fixes this by allowing action
-  //  creators to return functions instead of plain objects.
-
-
-
-  // In Redux (or Redux Toolkit), a thunk is a higher-order function that allows
-  //  you to write logic that interacts with the Redux store, such as asynchronous actions (like API calls).
-  //  When using redux-thunk as middleware, 
-  // every action creator can either return an action object (the typical approach) or
-  //  return a function instead.
-
-  //  reason why dispatch is written( this is  a thunk)
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
