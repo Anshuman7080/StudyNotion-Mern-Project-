@@ -32,7 +32,7 @@ const VideoDetails = () => {
             navigate("/dashboard/enrolled-courses");
         }
         else {
-            //let's assume k all 3 fields are present
+           
 
             const filteredData = courseSectionData.filter(
                 (course) => course._id === sectionId
@@ -101,16 +101,16 @@ const VideoDetails = () => {
     )
 
     if(currentSubSectionIndex !== noOfSubSections - 1) {
-        //same section ki next video me jao
+     
         const nextSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSectionIndex + 1]._id;
-        //next video pr jao
+    
         navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${nextSubSectionId}`)
     }
     else {
-        //different section ki first video
+      
         const nextSectionId = courseSectionData[currentSectionIndex + 1]._id;
         const nextSubSectionId = courseSectionData[currentSectionIndex + 1].subSection[0]._id;
-        ///iss voide par jao 
+      
         navigate(`/view-course/${courseId}/section/${nextSectionId}/sub-section/${nextSubSectionId}`)
     }
   }
@@ -128,17 +128,17 @@ const VideoDetails = () => {
     )
 
     if(currentSubSectionIndex != 0 ) {
-        //same section , prev video
+      
         const prevSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSubSectionIndex - 1];
-        //iss video par chalge jao
+     
         navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${prevSubSectionId}`)
     }
     else {
-        //different section , last video
+
         const prevSectionId = courseSectionData[currentSectionIndex - 1]._id;
         const prevSubSectionLength = courseSectionData[currentSectionIndex - 1].subSection.length;
         const prevSubSectionId = courseSectionData[currentSectionIndex - 1].subSection[prevSubSectionLength - 1]._id;
-        //iss video par chalge jao
+   
         navigate(`/view-course/${courseId}/section/${prevSectionId}/sub-section/${prevSubSectionId}`)
 
     }
@@ -148,11 +148,11 @@ const VideoDetails = () => {
 
   const handleLectureCompletion = async() => {
 
-    ///dummy code, baad me we will replace it witht the actual call
+
     setLoading(true);
-    //PENDING - > Course Progress PENDING
+ 
     const res = await markLectureAsComplete({courseId: courseId, subSectionId: subSectionId}, token);
-    //state update
+
     if(res) {
         dispatch(updateCompletedLectures(subSectionId)); 
     }
