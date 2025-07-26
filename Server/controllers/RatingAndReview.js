@@ -1,17 +1,17 @@
 const RatingAndReview = require('../models/RatingAndReview');
 const Course = require('../models/Course');
 
-//createRating
+
 exports.createRating = async (req, res) => {
     try{
 
-        //get user id
+   
         const userId = req.user.id;
    
-        //fetchdata from req body
+      
         const {rating, review, courseId} = req.body;
       
-        //check if user is enrolled or not
+      
         const courseDetails = await Course.findOne(
                                     {_id:courseId,
                                     studentsEnrolled: {$elemMatch: {$eq: userId} },
@@ -25,7 +25,7 @@ exports.createRating = async (req, res) => {
             });
         }
       
-        //check if user already reviewed the course
+       
         const alreadyReviewed = await RatingAndReview.findOne({
                                                 user:userId,
                                                 course:courseId,
@@ -38,7 +38,7 @@ exports.createRating = async (req, res) => {
                     });
                 }
                
-        //create rating and review
+        
         const ratingReview = await RatingAndReview.create({
                                         rating, review, 
                                         course:courseId,
@@ -47,7 +47,7 @@ exports.createRating = async (req, res) => {
 
                                    
        
-        //update course with this rating/review
+        
         const updatedCourseDetails = await Course.findByIdAndUpdate({_id:courseId},
                                     {
                                         $push: {
@@ -57,7 +57,7 @@ exports.createRating = async (req, res) => {
                                     {new: true});
                                    
         console.log(updatedCourseDetails);
-        //return response
+      
         return res.status(200).json({
             success:true,
             message:"Rating and Review created Successfully",
@@ -73,12 +73,11 @@ exports.createRating = async (req, res) => {
     }
 }
 
-//getAverageRating
 exports.getAverageRating = async (req, res) => {
     try {
-        //get course ID
+
         const courseId = req.body.courseId;
-        //calculate average rating
+      
         const result = await RatingAndReview.aggregate([
             {
                 $match: {
@@ -92,7 +91,7 @@ exports.getAverageRating = async (req, res) => {
                 }
             }
         ])
-        //return rating
+       
         if(result.length > 0) {
             return res.status(200).json({
                 success: true,
@@ -100,7 +99,7 @@ exports.getAverageRating = async (req, res) => {
             });
         }
 
-        // if no rating/review exists
+      
         return res.status(200).json({
             success: true, 
             message: 'Average Rating is 0, no rating given till now',
@@ -116,7 +115,7 @@ exports.getAverageRating = async (req, res) => {
     }
 }
 
-//getAllRatingAndReviews
+
 exports.getAllRatingAndReviews = async (req, res) => {
     try {
         const allReviews = await RatingAndReview.find({})
