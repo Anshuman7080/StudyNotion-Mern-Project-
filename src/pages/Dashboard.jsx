@@ -22,7 +22,7 @@ const Dashboard = () => {
   return (
     <div className="relative flex min-h-[calc(100vh-3.5rem)] w-full">
       
-      {/* Hamburger icon (visible only on small screens) */}
+  
 
       <button
         className="md:hidden absolute top-2 left-4 z-50 text-3xl text-white"
@@ -31,7 +31,7 @@ const Dashboard = () => {
         &#9776;
       </button>
 
-      {/* Sidebar - responsive behavior */}
+     
       <div
         className={`fixed md:static top-14 left-0 h-full z-40  transition-transform duration-300 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -45,14 +45,13 @@ const Dashboard = () => {
         setConfirmationModal={setConfirmationModal} />
       </div>
 
-      {/* Main content area */}
+
       <div className="h-[calc(100vh-3.5rem)] mx-auto overflow-auto w-full md:w-[80%] py-10 px-4">
         <Outlet />
       </div>
 
       
 
-       {/* Confirmation Modal */}
             {confirmationModal && (
                 <ConfirmationModal modalData={confirmationModal} />
             )}
