@@ -90,15 +90,14 @@ exports.deleteSection = async (req,res) => {
 
         const sectionDetails = await Section.findById(sectionId);
         
-        // //Section ke ander ke subsections delete kiye hai 
+       
         sectionDetails.subSection.forEach( async (ssid)=>{
             await SubSection.findByIdAndDelete(ssid);
         })
         console.log('Subsections within the section deleted')
-        //NOTE: Due to cascading deletion, Mongoose automatically triggers the built-in middleware to perform a cascading delete for all the referenced 
-        //SubSection documents. DOUBTFUL!
+        
 
-        //From course, courseContent the section gets automatically deleted due to cascading delete feature
+      
         await Section.findByIdAndDelete(sectionId);
         console.log('Section deleted')
 
