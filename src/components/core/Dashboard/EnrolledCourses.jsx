@@ -22,7 +22,7 @@ const EnrolledCourses = () => {
             }
         } catch (error) {
             console.error("Error fetching enrolled courses:", error);
-            setEnrolledCourses([]); // Handle error gracefully
+            setEnrolledCourses([]); 
         }
     };
 
