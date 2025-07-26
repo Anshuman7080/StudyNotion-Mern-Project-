@@ -32,9 +32,8 @@ const ContactUsForm = () => {
         console.log("Logging data", data);
         try {
             setLoading(true);
-            // Uncomment when you have API setup
-            // const response = await apiConnector("POST", contactusEndpoint.CONTACT_US_API, data);
-            const response = { status: "OK" }; // Placeholder for testing
+            
+            const response = { status: "OK" }; 
             console.log("Logging response", response);
             
             setLoading(false);
