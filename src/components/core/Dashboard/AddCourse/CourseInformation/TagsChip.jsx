@@ -10,6 +10,7 @@ const TagsChip = ({ name, label, errors, register, setValue }) => {
         register(name, { required: true });
     }, [name, register]);
 
+    //console.log(tags);
     
     useEffect(() => {
         setValue(name, tagList);
