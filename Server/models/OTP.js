@@ -18,13 +18,9 @@ const OTPSchema = new mongoose.Schema({
     },
 });
 
-//async function -> to send emails
+
 async function sendVerificationEMail(email, otp) {
-    //Create a transporter to send emails
-
-    //Define the email options
-
-    //send the email
+   
     try {
         const mailResponse = await mailSender(
             email, 
@@ -38,18 +34,18 @@ async function sendVerificationEMail(email, otp) {
     }
 }
 
-//Defining a post-save hook to send email after the document has been saved
+
 OTPSchema.pre("save", async function(next) {
     console.log("New document saved to the database");
 
-    //only send an email when a new document is created 
+  
     if(this.isNew) {
         await sendVerificationEMail(this.email, this.otp);
     }
     next();
 }) 
 
-// module.exports = mongoose.model("OTP", OTPSchema);
+
 
 const OTP = mongoose.model("OTP", OTPSchema);
 module.exports = OTP;
