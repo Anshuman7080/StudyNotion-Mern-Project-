@@ -62,9 +62,9 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
   return (
     <>
         <div className="flex h-[calc(100vh-3.5rem)] w-[320px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800">
-            {/* for buttons and headings */}
+           
             <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25">
-                {/* for buttons */}
+              
                 <div className="flex w-full items-center justify-between ">
                     <div 
                     onClick={()=> {
@@ -86,7 +86,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
 
                 </div>
                 
-                {/* for heading or title */}
+               
 
                 <div className="flex flex-col">
                     <p>{courseEntireData?.courseName}</p>
@@ -94,7 +94,6 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                 </div>
             </div>
 
-            {/* for sections and subSections */}
             <div  className="h-[calc(100vh - 5rem)] overflow-y-auto">
                 {
                     courseSectionData.map((course, index)=> (
@@ -104,13 +103,13 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                         key={index}
                         >
 
-                            {/* section */}
+                      
 
                             <div className="flex flex-row justify-between bg-richblack-600 px-5 py-4">
                                 <div className="w-[70%] font-semibold">
                                     {course?.sectionName}
                                 </div>
-                                {/* HW- add icon here and handle rotate 180 logic */}
+                             
                                 <div className="flex items-center gap-3">
                                     {/* <span className="text-[12px] font-medium">
                                         Lession {course?.subSection.length}
@@ -127,7 +126,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                                 </div>
                             </div>
 
-                            {/* subSections */}
+                            
                             <div>
                                 {
                                     activeStatus === course?._id && (
