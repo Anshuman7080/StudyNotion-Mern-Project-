@@ -4,6 +4,10 @@ const mailSender = async (email, title, body) => {
     try {
 
         console.log("coming in mailSender")
+        console.log("MAIL_HOST:", process.env.MAIL_HOST)
+      console.log("MAIL_USER:", process.env.MAIL_USER)
+        console.log("MAIL_PASS:",  process.env.MAIL_PASS)
+        
         let transporter = nodemailer.createTransport({
             host : process.env.MAIL_HOST,
             auth : {
