@@ -1,7 +1,9 @@
 const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
-    try { 
+    try {
+
+        console.log("coming in mailSender)
         let transporter = nodemailer.createTransport({
             host : process.env.MAIL_HOST,
             auth : {
@@ -10,13 +12,15 @@ const mailSender = async (email, title, body) => {
             },
         });
 
+        console.log("coming below transporter")
+
         let info = await transporter.sendMail({
             from: 'StudyNotion || by Anshuman',
             to: `${email}`,
             subject: `${title}`,
             html: `${body}`,
         })
-        console.log(info);
+        console.log("info is...",info);
         return info;
 
     } catch (error) {
