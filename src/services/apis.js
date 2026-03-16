@@ -1,5 +1,5 @@
 
-const BASE_URL ="https://studynotion-mern-project-backend.onrender.com/api/v1"
+const BASE_URL ="https://study-notion-mern-project-bzy2.vercel.app/api/v1"
 
 // const BASE_URL=process.env.REACT_APP_BASE_URL
 
